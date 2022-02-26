@@ -1,5 +1,7 @@
 package com.jcabrera.whatsappdemo.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 @Schema(description = "ChatAPI Client static variables")
 public class ApiClient {
   static public final String basePath = "basePath.com/";
