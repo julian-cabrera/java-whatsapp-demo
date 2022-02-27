@@ -25,15 +25,33 @@ import lombok.ToString;
 @Schema(description = "Message model from ChatAPI", requiredProperties = {"id", "body"})
 public class Message {
   @Id
+  @Column(length = 70)
   private String id;
+
+  @Column(nullable = false)
   private String body;
+
+  @Column(length = 8)
   private String type;
+
+  @Column(length = 50)
   private String senderName;
+
+  @Column(length = 50)
   private String author;
+
+  @Column(length = 70)
   private String chatId;
+
+  @Column(length = 50)
   private String mentionedPhones;
+
+  @Column(length = 50)
   private String quotedMsgId;
+
+  @Column(length = 160)
   private String quotedMsgBody;
+
   private String filename;
   private String caption;
   private String audio;
@@ -43,11 +61,26 @@ public class Message {
   private Integer messageNumber;
   private Integer queueNumber;
 
-  private Boolean sent;
-  private Boolean fromMe;
-  private Boolean cached;
+  // private Boolean sent;
+  // private Boolean fromMe;
+  // private Boolean cached;
   
   public void update(Message message) {
-    System.out.println("Message update()");
+    this.id = message.getId();
+    this.body = message.getBody();
+    this.type = message.getType();
+    this.senderName = message.getSenderName();
+    this.author = message.getAuthor();
+    this.chatId = message.getChatId();
+    this.mentionedPhones = message.getMentionedPhones();
+    this.quotedMsgId = message.getQuotedMsgId();
+    this.quotedMsgBody = message.getQuotedMsgBody();
+    this.filename = message.getFilename();
+    this.caption = message.getCaption();
+    this.audio = message.getAudio();
+    this.time = message.getTime();
+    this.phone = message.getPhone();
+    this.messageNumber = message.getMessageNumber();
+    this.queueNumber = message.getQueueNumber();
   }
 }

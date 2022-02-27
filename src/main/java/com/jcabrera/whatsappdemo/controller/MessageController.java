@@ -31,5 +31,4 @@ public class MessageController {
     return service.getAll();
   }
 
-  
 }
