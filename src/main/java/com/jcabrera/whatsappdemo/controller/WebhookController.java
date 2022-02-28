@@ -6,13 +6,14 @@ import com.jcabrera.whatsappdemo.service.WebhookService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
@@ -27,6 +28,7 @@ public class WebhookController {
   @ResponseStatus(HttpStatus.CREATED)
   @Operation(summary = "Receives data from ChatAPI", description = "Gets the message and stores it in the database")
   public Message receive(@RequestBody Webhook request) {
+    System.out.println("receive(request): " + request);
     return service.receiveFromChatAPI(request);
   }
   
