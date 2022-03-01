@@ -65,10 +65,9 @@ public class WebhookServiceImpl implements WebhookService {
       HttpHeaders headers = new HttpHeaders();
       headers.add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36");
       HttpEntity<?> entity = new HttpEntity<>(message, headers);
-      ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
-      
-      
-      
+
+      ResponseEntity<Message> response = restTemplate.exchange(url, HttpMethod.POST, entity, Message.class);
+
       System.out.println("sendToChatAPI(Request:" + message + " )");
       return service.save(message);
   }

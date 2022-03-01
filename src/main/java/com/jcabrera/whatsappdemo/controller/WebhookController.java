@@ -6,7 +6,7 @@ import com.jcabrera.whatsappdemo.service.WebhookService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +26,7 @@ public class WebhookController {
 
   @PostMapping("/receive")
   @ResponseStatus(HttpStatus.CREATED)
+  @CrossOrigin(origins = "*", allowedHeaders = "*")
   @Operation(summary = "Receives data from ChatAPI", description = "Gets the message and stores it in the database")
   public Message receive(@RequestBody Webhook request) {
     System.out.println("receive(request): " + request);
@@ -34,6 +35,7 @@ public class WebhookController {
   
   @PostMapping("/send")
   @ResponseStatus(HttpStatus.CREATED)
+  @CrossOrigin(origins = "*", allowedHeaders = "*")
   @Operation(summary = "Sends data to ChatAPI", description = "Stores a message in the database and sends it to ChatAPI.")
   public Message send(@RequestBody Message message){
     return service.sendToChatAPI(message);
