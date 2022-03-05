@@ -1,7 +1,5 @@
 package com.jcabrera.whatsappdemo;
 
-import com.jcabrera.whatsappdemo.model.ApiClient;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -14,18 +12,8 @@ import io.swagger.v3.oas.annotations.info.Info;
 @OpenAPIDefinition(info = @Info(title = "Rest Api Demo", version = "1.0", description = "ChatAPI and GoogleDrive API integration demo.", 
 contact = @Contact(email = "julian.e.cabrera@hotmail.com", name = "Julián Cabrera", url = "https://github.com/julian-cabrera")))
 public class WhatsappDemoApplication {
-
+	
 	public static void main(String[] args) {
 		SpringApplication.run(WhatsappDemoApplication.class, args);
-
-		
-		ApiClient.builder()
-		.apiKey("apiKey")
-		.basePath("basePath")
-		.instanceId("instanceId")
-		.token("token")
-		.webHook(null)
-				.build();
 	}
-
 }

@@ -22,6 +22,11 @@ public class ApiClientServiceImpl implements ApiClientService {
   }
 
   @Override
+  public ApiClient findByInstanceNumber(int instanceNumber) {
+    return repo.findByInstanceNumber(instanceNumber);
+  }
+
+  @Override
   public ApiClient save(ApiClient client) {
     return repo.save(client);
   }

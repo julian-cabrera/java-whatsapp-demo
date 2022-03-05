@@ -6,6 +6,8 @@ public interface ApiClientService {
 
   public ApiClient get(Long id);
 
+  public ApiClient findByInstanceNumber(int instanceNumber);
+
   public ApiClient save(ApiClient chat);
 
   public ApiClient update(Long id, ApiClient chat);
