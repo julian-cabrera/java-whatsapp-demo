@@ -4,8 +4,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -21,7 +23,7 @@ import lombok.ToString;
 @Builder
 @Entity
 @Table(name = "t_wsp_message")
-@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonIgnoreProperties(ignoreUnknown = true, value = "chat")
 @Schema(description = "Message model from ChatAPI", requiredProperties = {"id", "body"})
 public class Message {
   @Id
@@ -61,9 +63,15 @@ public class Message {
   private Integer messageNumber;
   private Integer queueNumber;
 
-  // private Boolean sent;
-  // private Boolean fromMe;
-  // private Boolean cached;
+  @Transient
+  @JsonInclude
+  private Boolean sent;
+  @Transient
+  @JsonInclude
+  private Boolean fromMe;
+  @Transient
+  @JsonInclude
+  private Boolean cached;
   
   public void update(Message message) {
     this.id = message.getId();

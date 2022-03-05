@@ -14,7 +14,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Webhook {
+public class WebhookPayload {
   Acknowledge ack;
   List<Message> messages;
   Integer lastMessageNumber;

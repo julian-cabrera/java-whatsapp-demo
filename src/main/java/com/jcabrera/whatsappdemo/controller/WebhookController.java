@@ -1,7 +1,7 @@
 package com.jcabrera.whatsappdemo.controller;
 
 import com.jcabrera.whatsappdemo.model.Message;
-import com.jcabrera.whatsappdemo.model.Webhook;
+import com.jcabrera.whatsappdemo.model.WebhookPayload;
 import com.jcabrera.whatsappdemo.service.WebhookService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ public class WebhookController {
   @ResponseStatus(HttpStatus.CREATED)
   @CrossOrigin(origins = "*", allowedHeaders = "*")
   @Operation(summary = "Receives data from ChatAPI", description = "Gets the message and stores it in the database")
-  public Message receive(@RequestBody Webhook request) {
+  public Message receive(@RequestBody WebhookPayload request) {
     System.out.println("receive(request): " + request);
     return service.receiveFromChatAPI(request);
   }

@@ -1,5 +1,7 @@
 package com.jcabrera.whatsappdemo;
 
+import com.jcabrera.whatsappdemo.model.ApiClient;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -15,6 +17,15 @@ public class WhatsappDemoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(WhatsappDemoApplication.class, args);
+
+		
+		ApiClient.builder()
+		.apiKey("apiKey")
+		.basePath("basePath")
+		.instanceId("instanceId")
+		.token("token")
+		.webHook(null)
+				.build();
 	}
 
 }
