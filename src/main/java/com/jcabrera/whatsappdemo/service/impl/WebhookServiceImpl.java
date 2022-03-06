@@ -53,22 +53,23 @@ public class WebhookServiceImpl implements WebhookService {
           
           restTemplate = new RestTemplate();
           headers = new HttpHeaders();
-          // headers.add("user-agent",
-          //     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36");
-          headers.add("user-agent", "Application");
+          headers.add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36");
           entity = new HttpEntity<>(headers);
 
           
           ApiClient client = clientService.findByInstanceNumber(349303);
-          url = client.getBasePath() + client.getInstanceId() + "/dialog?token=" + client.getToken() + "&chatId="
-              + "5493434620007@c.us";
-          // message.getChatId();
-          Chat newChat = restTemplate.getForObject(url, Chat.class);
-          // ResponseEntity<Chat> response = restTemplate.exchange(url, HttpMethod.GET, entity, Chat.class);
-          // Chat newChat = response.getBody();
-          chatService.save(newChat);
+          url = client.getBasePath() + client.getInstanceId() + "/dialog?token=" + client.getToken() + "&chatId=" + message.getChatId();
+          
+          ResponseEntity<Chat> response = restTemplate.exchange(url, HttpMethod.GET, entity, Chat.class);
+          Chat newChat = response.getBody();
+
+          if (newChat.getId() == null) {
+            return null;
+          }
           System.out.println("Saved chat: " + newChat);
           System.out.println("Saved message: " + message);
+
+          chatService.save(newChat);
           return messageService.save(message);
         } else {
           System.out.println("Saved message: " + message);
