@@ -1,8 +1,5 @@
 package com.jcabrera.whatsappdemo.service.impl;
 
-
-import java.util.Collections;
-
 import com.jcabrera.whatsappdemo.exception.CouldNotCreateResourceException;
 import com.jcabrera.whatsappdemo.model.ApiClient;
 import com.jcabrera.whatsappdemo.model.Chat;
@@ -17,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -57,7 +53,7 @@ public class WebhookServiceImpl implements WebhookService {
           entity = new HttpEntity<>(headers);
 
           
-          ApiClient client = clientService.findByInstanceNumber(349303);
+          ApiClient client = clientService.findByInstanceNumber(349303); //Hardcoded for now.
           url = client.getBasePath() + client.getInstanceId() + "/dialog?token=" + client.getToken() + "&chatId=" + message.getChatId();
           
           ResponseEntity<Chat> response = restTemplate.exchange(url, HttpMethod.GET, entity, Chat.class);
@@ -93,9 +89,10 @@ public class WebhookServiceImpl implements WebhookService {
     }
 
     if (message.getAudio() != null && message.getAudio() != "") {
+      //TODO Google Drive API not yet implemented.
       // String idAudio = fileService.uploadFromUrl(message.getAudio(), "ogg");
       // message.setAudio("https://drive.google.com/uc?export=view&id=" + idAudio);
-      // messageType = "/sendPTT?";
+      messageType = "/sendPTT?";
     }
 
     if (message.getType() == "chat" || message.getType() == null) {
@@ -113,11 +110,12 @@ public class WebhookServiceImpl implements WebhookService {
     headers.add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36");
     entity = new HttpEntity<>(message, headers);
 
-    //ResponseEntity<Message> response = 
-    restTemplate.exchange(url, HttpMethod.POST, entity, Message.class);
+    ResponseEntity<Message> response = restTemplate.exchange(url, HttpMethod.POST, entity, Message.class);
 
     System.out.println("sendToChatAPI(Request:" + message + " )");
-    return messageService.save(message);
+    messageService.save(message);
+    
+    return response.getBody();
   }
 
 }
