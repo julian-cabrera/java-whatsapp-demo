@@ -33,6 +33,11 @@ public class MessageServiceImp implements MessageService {
   }
 
   @Override
+  public Message getLastMessage(String chatID, int time) {
+    return repo.getLastMessage(chatID, time);
+  }
+
+  @Override
   public List<Message> getAll() {
     return repo.findAll();
   }

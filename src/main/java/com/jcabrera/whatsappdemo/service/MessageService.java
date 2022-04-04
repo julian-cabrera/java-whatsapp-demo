@@ -9,6 +9,8 @@ public interface MessageService {
 
   public Message getByChatId(String chatId);
 
+  public Message getLastMessage(String chatID, int time);
+
   public List<Message> getAll();
 
   public Message save(Message message);
