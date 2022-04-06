@@ -9,8 +9,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MessageRepository extends JpaRepository<Message, Long> {
 
+  @Query(value = "SELECT TOP 1(m.body) FROM t_wsp_message m WHERE m.chat_id LIKE %?1% ORDER BY m.time DESC", nativeQuery = true)
+  public Message getLastMessage(String chatID);
 
-  //Correction: jpa doesn't support MAX 
-  @Query("select max(m.time) from Message m where m.chat_id like %?1%")
-  public Message getLastMessage(String chatID, int time);
+  
 }

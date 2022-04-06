@@ -33,8 +33,8 @@ public class MessageServiceImp implements MessageService {
   }
 
   @Override
-  public Message getLastMessage(String chatID, int time) {
-    return repo.getLastMessage(chatID, time);
+  public Message getLastMessage(String chatID) {
+    return repo.getLastMessage(chatID);
   }
 
   @Override
@@ -46,7 +46,7 @@ public class MessageServiceImp implements MessageService {
   public Message save(Message message) {
     return repo.save(message);
   }
-
+  
   @Override
   public Message update(Long id, Message message) {
     Message actualMessage = repo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Message with ID" + id + "could not be found. Could not update message."));

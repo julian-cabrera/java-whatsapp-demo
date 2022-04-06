@@ -9,7 +9,7 @@ public interface MessageService {
 
   public Message getByChatId(String chatId);
 
-  public Message getLastMessage(String chatID, int time);
+  public Message getLastMessage(String chatID);
 
   public List<Message> getAll();
 

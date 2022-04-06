@@ -21,9 +21,16 @@ public class ChatController {
   @Autowired
   ChatService service;
   
+  @GetMapping("/full")
+  @CrossOrigin(origins = "*", allowedHeaders = "*")
+  public List<?> getChatsWithLastMessage(){
+    return service.getChatsWithLastMessage();
+  }
+
   @GetMapping
   @CrossOrigin(origins = "*", allowedHeaders = "*")
   public List<Chat>  getChats(){
     return service.getAll();
   }
+
 }

@@ -28,6 +28,11 @@ public class ChatServiceImpl implements ChatService {
   public Chat getByChatId(String chatId) {
     return repo.findByChatId(chatId);
   }
+
+  @Override
+  public List<?> getChatsWithLastMessage(){
+    return repo.getChatsWithLastMessage();
+  }
   
   @Override
   public List<Chat> getAll() {
