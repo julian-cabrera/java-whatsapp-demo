@@ -1,7 +1,6 @@
 package com.jcabrera.whatsappdemo.service.impl;
 
 import java.util.List;
-import java.util.Optional;
 
 import com.jcabrera.whatsappdemo.exception.ResourceNotFoundException;
 import com.jcabrera.whatsappdemo.model.Message;
@@ -9,7 +8,6 @@ import com.jcabrera.whatsappdemo.repository.MessageRepository;
 import com.jcabrera.whatsappdemo.service.MessageService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,10 +24,8 @@ public class MessageServiceImp implements MessageService {
   }
 
   @Override
-  public Message getByChatId(String chatId) {
-    Example<Message> example = Example.of(Message.builder().chatId(chatId).build());
-    Optional<Message> message = repo.findOne(example);
-    return message.isPresent() ? message.get() : null;
+  public List<Message> getByChatID(String chatID) {
+    return repo.getByChatID(chatID);
   }
 
   @Override

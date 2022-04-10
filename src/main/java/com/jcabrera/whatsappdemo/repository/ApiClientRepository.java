@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ApiClientRepository extends JpaRepository<ApiClient, Long>{
-  @Query("select a from ApiClient a where a.instanceId like %?1")
+  @Query("SELECT a FROM ApiClient a WHERE a.instanceId = ?1")
   public ApiClient findByInstanceNumber(int instanceNumber);
 }

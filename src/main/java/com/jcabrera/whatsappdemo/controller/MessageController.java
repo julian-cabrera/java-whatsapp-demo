@@ -1,5 +1,7 @@
 package com.jcabrera.whatsappdemo.controller;
 
+import java.util.List;
+
 import com.jcabrera.whatsappdemo.model.Message;
 import com.jcabrera.whatsappdemo.service.MessageService;
 
@@ -22,7 +24,7 @@ public class MessageController {
   
   @GetMapping
   @CrossOrigin(origins = "*", allowedHeaders = "*")
-  public Message  getLastMessage(@RequestParam String chatID){
-    return service.getLastMessage(chatID);
+  public List<Message>  getAll(@RequestParam String chatID){
+    return service.getByChatID(chatID);
   }
 }

@@ -54,7 +54,7 @@ public class WebhookServiceImpl implements WebhookService {
 
           
           ApiClient client = clientService.findByInstanceNumber(349303); //Hardcoded for now.
-          url = client.getBasePath() + client.getInstanceId() + "/dialog?token=" + client.getToken() + "&chatId=" + message.getChatId();
+          url = client.getBasePath() + "/instance" + client.getInstanceId() + "/dialog?token=" + client.getToken() + "&chatId=" + message.getChatId();
           
           ResponseEntity<Chat> response = restTemplate.exchange(url, HttpMethod.GET, entity, Chat.class);
           Chat newChat = response.getBody();
@@ -82,7 +82,10 @@ public class WebhookServiceImpl implements WebhookService {
   public Message sendToChatAPI(Message message) throws CouldNotCreateResourceException {
       
     restTemplate = new RestTemplate();
-    String messageType = "";
+    headers = new HttpHeaders();
+    headers.add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36");
+    entity = new HttpEntity<>(message, headers);
+    String messageType = "/sendMessage?";
 
     if (message.getBody() != null && message.getBody().length() > 10000) {
       throw new CouldNotCreateResourceException("Message is too long, can't excede 10k characters.");
@@ -95,27 +98,26 @@ public class WebhookServiceImpl implements WebhookService {
       messageType = "/sendPTT?";
     }
 
-    if (message.getType() == "chat" || message.getType() == null) {
-      messageType = "/sendMessage?";
-    } else {
-      messageType = "/sendFile?";
-      //fileService.uploadFromUrl(message.getBody(), )
-    }
+    // if (message.getType() == "chat" || message.getType() == null) {
+    //   messageType = "/sendMessage?";
+    // } else {
+    //   messageType = "/sendFile?";
+    //   //fileService.uploadFromUrl(message.getBody(), )
+    // }
 
-    ApiClient client = clientService.get(Long.valueOf(1));
-    url = client.getBasePath() + client.getInstanceId() + messageType + "token=" + client.getToken();
+    ApiClient client = clientService.findByInstanceNumber(349303); //Hardcoded for now.
+    url = client.getBasePath() + "/instance" + client.getInstanceId() + messageType + "token=" + client.getToken();
     
-    
-    headers = new HttpHeaders();
-    headers.add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36");
-    entity = new HttpEntity<>(message, headers);
-
     ResponseEntity<Message> response = restTemplate.exchange(url, HttpMethod.POST, entity, Message.class);
+    Message newMessage = response.getBody();
+
+    if (newMessage.getId() == null) { return null; }
+
+    System.out.println("***** Saved chat: " + newMessage);
+    System.out.println("***** Saved message: " + newMessage);
 
     System.out.println("sendToChatAPI(Request:" + message + " )");
-    messageService.save(message);
-    
-    return response.getBody();
+    return messageService.save(response.getBody());
   }
 
 }

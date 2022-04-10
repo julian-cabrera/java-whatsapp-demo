@@ -54,23 +54,18 @@ public class Message {
   @Column(length = 160)
   private String quotedMsgBody;
 
+  
   private String filename;
   private String caption;
   private String audio;
-
+  
   private Integer time; //Unix Timestamp
   private Integer phone;
   private Integer messageNumber;
   private Integer queueNumber;
-
-  @Transient
-  @JsonInclude
-  private Boolean sent;
-  @Transient
-  @JsonInclude
+  
   private Boolean fromMe;
-  @Transient
-  @JsonInclude
+  private Boolean sent;
   private Boolean cached;
   
   public void update(Message message) {

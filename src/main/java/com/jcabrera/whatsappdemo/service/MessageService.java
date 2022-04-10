@@ -7,7 +7,7 @@ import com.jcabrera.whatsappdemo.model.Message;
 public interface MessageService {
   public Message get(Long id);
 
-  public Message getByChatId(String chatId);
+  public List<Message> getByChatID(String chatID);
 
   public Message getLastMessage(String chatID);
 

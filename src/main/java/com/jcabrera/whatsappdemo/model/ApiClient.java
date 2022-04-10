@@ -35,8 +35,8 @@ public class ApiClient {
 	
 	private String webHook;
 	
-	@Column(length = 20, unique = true)
-	private String instanceId;
+	@Column(unique = true)
+	private Integer instanceId;
 	
 	@Column(length = 20, unique = true)
 	private String token;
