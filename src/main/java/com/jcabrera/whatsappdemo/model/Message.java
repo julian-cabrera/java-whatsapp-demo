@@ -27,7 +27,7 @@ import lombok.ToString;
 @Schema(description = "Message model from ChatAPI", requiredProperties = {"id", "body"})
 public class Message {
   @Id
-  @Column(length = 70)
+  @Column(length = 75)
   private String id;
 
   @Column(nullable = false)

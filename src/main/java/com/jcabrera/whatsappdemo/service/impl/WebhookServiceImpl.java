@@ -85,25 +85,25 @@ public class WebhookServiceImpl implements WebhookService {
     headers = new HttpHeaders();
     headers.add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36");
     entity = new HttpEntity<>(message, headers);
-    String messageType = "/sendMessage?";
+    String messageType = "";
 
     if (message.getBody() != null && message.getBody().length() > 10000) {
       throw new CouldNotCreateResourceException("Message is too long, can't excede 10k characters.");
     }
 
-    if (message.getAudio() != null && message.getAudio() != "") {
+    if (!message.getAudio().equals(null) && !message.getAudio().equals("")) {
       //TODO Google Drive API not yet implemented.
       // String idAudio = fileService.uploadFromUrl(message.getAudio(), "ogg");
       // message.setAudio("https://drive.google.com/uc?export=view&id=" + idAudio);
       messageType = "/sendPTT?";
     }
 
-    // if (message.getType() == "chat" || message.getType() == null) {
-    //   messageType = "/sendMessage?";
-    // } else {
-    //   messageType = "/sendFile?";
-    //   //fileService.uploadFromUrl(message.getBody(), )
-    // }
+    if (message.getType().equals("chat") || message.getType().equals(null)) {
+      messageType = "/sendMessage?";
+    } else {
+      messageType = "/sendFile?";
+      //fileService.uploadFromUrl(message.getBody(), )
+    }
 
     ApiClient client = clientService.findByInstanceNumber(349303); //Hardcoded for now.
     url = client.getBasePath() + "/instance" + client.getInstanceId() + messageType + "token=" + client.getToken();

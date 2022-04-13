@@ -35,7 +35,7 @@ import lombok.ToString;
 public class Chat {
 
   @Id
-  @Column(length = 70)
+  @Column(length = 75)
   private String id;
 
   @Column(length = 50)
