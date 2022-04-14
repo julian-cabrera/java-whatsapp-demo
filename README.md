@@ -1,7 +1,11 @@
 ## About
 **RestAPI** that can send and receive Whatsapp messages through ***[ChatAPI](https://chat-api.com/)***, a *Whatsapp API gateway*.
 
->*This project's purpose is to demonstrate some of my Java and ReactJs skills.*
+>*This project's purpose's to demonstrate some of my Java and ReactJs skills.*
+>*I have done this by myself over time, with stuff I've learned. It is not copy-pasted code from a tutorial. It still lacks many features, I don't have much free time, so I try to do what I can, whenever I can. Hopefully, you won't be so harsh on me :)*
+
+How it's looking so far:
+![image](https://user-images.githubusercontent.com/99363663/163307122-cd6c4061-1dfa-4337-8a40-d46acc9c1bfc.png)
 
 <br />
 
